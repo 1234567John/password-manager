@@ -40,14 +40,19 @@ while choice !='q':
          file.write(encrypted_urlresource+'\n')
          print('\nURL/resource has been added:')
 
-    elif choice=='2':  
-     print('\nList of credentials:')   
-     print('Username/Password/URLresource\n')
-     with open(file_path,'r') as file:  #reads the file
-      lines=file.readlines()
-      credentials=[line.strip()for line in lines]#removes the /n at the end of each credential
-      decryption=[decrypt(c)for c in credentials]#decrypts the credentials that happened in option 1,
-      print(f"[{', '.join(decryption)}]\n")  #the credentials are printed in this format []
+    elif choice=='2': 
+     
+     if os.path.getsize(file_path)==0: #checks if the text file has any lines and if not it will print statement below
+      print("No credentials has been found.\n")
+     else:
+      print('\nList of credentials:')
+      print('Username/Password/URLresource\n') 
+      with open(file_path,'r') as file:  #reads the file
+       lines=file.readlines()
+       credentials=[line.strip()for line in lines]#removes the /n at the end of each credential
+       decryption=[decrypt(c)for c in credentials]#decrypts the credentials that happened in option 1,
+       print(f"[{', '.join(decryption)}]\n")  #the credentials are printed in this format []    
+     
 
     elif choice=='q':   
         print('\nExiting Password Manager')   
